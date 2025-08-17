@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Default = light theme */
+  --bg-primary: #B8E3E9;
+  --bg-secondary: #93B1B5;
+  --bg-accent: #4F7C82;
+  --bg-dark: #0B2E33;
+
+  /* ✅ ADDED: Light theme gradient colors - Even darker shades */
+  --gradient-start: #B8D8E3;
+  --gradient-middle: #9BC7D6;
+  --gradient-end: #7EB6C9;
+
+  --text-primary: #0B2E33;
+  --text-secondary: #4F7C82;
+  
+  /* Additional colors for buttons and UI elements */
+  --color-blue: #3B82F6;
+  --color-blue-hover: #2563EB;
+  --color-green: #10B981;
+  --color-green-hover: #059669;
+  --color-red: #EF4444;
+  --color-purple: #8B5CF6;
+  --color-purple-hover: #7C3AED;
+  
+  /* Enhanced button colors for better visibility */
+  --button-bg-primary: #3B82F6;
+  --button-bg-primary-hover: #2563EB;
+  --button-bg-secondary: #6B7280;
+  --button-bg-secondary-hover: #4B5563;
+  
+  /* Input field colors */
+  --input-bg: #FFFFFF;
+  --input-text: #0B2E33;
+  --input-placeholder: #6B7280;
+  --input-border: #E5E7EB;
+  --input-focus-ring: #3B82F6;
+}
+
+.dark {
+  /* Dark theme overrides */
+  --bg-primary: #070F2B;
+  --bg-secondary: #1B1A55;
+  --bg-accent: #535C91;
+  --bg-dark: #9290C3;
+
+  /* ✅ ADDED: Dark theme gradient colors */
+  --gradient-start: #070F2B;
+  --gradient-middle: #1B1A55;
+  --gradient-end: #2D3748;
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #E2E8F0;
+  
+  /* Additional colors for buttons and UI elements */
+  --color-blue: #60A5FA;
+  --color-blue-hover: #3B82F6;
+  --color-green: #34D399;
+  --color-green-hover: #10B981;
+  --color-red: #F87171;
+  --color-purple: #A78BFA;
+  --color-purple-hover: #8B5CF6;
+  
+  /* Enhanced button colors for better visibility */
+  --button-bg-primary: #3B82F6;
+  --button-bg-primary-hover: #2563EB;
+  --button-bg-secondary: #6B7280;
+  --button-bg-secondary-hover: #4B5563;
+  
+  /* Input field colors */
+  --input-bg: #1F2937;
+  --input-text: #FFFFFF;
+  --input-placeholder: #9CA3AF;
+  --input-border: #374151;
+  --input-focus-ring: #60A5FA;
+}
+
+body {
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  transition: all 0.3s ease; /* Smooth theme transition */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ✅ ADDED: Beautiful gradient backgrounds */
+.page-gradient {
+  background: linear-gradient(135deg, 
+    var(--gradient-start) 0%, 
+    var(--gradient-middle) 50%, 
+    var(--gradient-end) 100%
+  );
+  min-height: 100vh;
+  transition: background 0.5s ease;
+}
+
+/* ✅ ADDED: Enhanced card backgrounds with subtle transparency */
+.gradient-card {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.15) 0%, 
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.dark .gradient-card {
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.25) 0%, 
+    rgba(0, 0, 0, 0.15) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* KEEPING your old flashcard + quiz styles as is... */
+.learn-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+.flashcard { perspective: 1000px; }
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.flashcard-front {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.flashcard-back {
+  background: var(--bg-dark);
+  color: var(--text-secondary);
+  transform: rotateY(180deg);
+}
+
+.quiz-option { transition: all 0.3s ease; }
+.quiz-option:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.quiz-option.correct {
+  background: var(--bg-accent);
+  color: var(--text-primary);
+}
+.quiz-option.incorrect {
+  background: var(--bg-dark);
+  color: var(--text-secondary);
+}

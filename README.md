@@ -40,6 +40,8 @@ npm run dev
 
 4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+5. Refresh the page if not loaded once 
+
 ## 📁 Project Structure
 
 ```
@@ -105,4 +107,5 @@ ollama pull llama3
 - **Students**: Create study materials from lecture notes
 - **Teachers**: Generate quizzes and learning aids
 - **Self-learners**: Get AI tutoring on any topic
+
 - **Exam Prep**: Practice with generated questions and flashcards 

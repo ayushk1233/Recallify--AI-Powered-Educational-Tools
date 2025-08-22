@@ -1,6 +1,6 @@
-# 📚 Recallify Template
+# 📚 Recallify - AI-Powered Educational Tools
 
-A Next.js template for building educational AI applications! This template provides three powerful learning tools: Flashcard Maker, Quiz Generator, and Ask-Me Study Buddy.
+A Next.js application for building educational AI applications! This project provides three powerful learning tools: Flashcard Maker, Quiz Generator, and Ask-Me Study Buddy, all powered by Together AI's cloud-based API.
 
 ## Features
 
@@ -40,8 +40,6 @@ npm run dev
 
 4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-5. Refresh the page if not loaded once 
-
 ## 📁 Project Structure
 
 ```
@@ -57,6 +55,8 @@ nextjs-app/
 │   ├── globals.css               # Global styles
 │   ├── layout.tsx                # Root layout component
 │   └── page.tsx                  # Main interface with all features
+├── lib/
+│   └── together-ai.ts            # Together AI configuration
 ├── package.json                  # Dependencies and scripts
 └── tsconfig.json                 # TypeScript configuration
 ```
@@ -80,13 +80,15 @@ nextjs-app/
 2. Type any question you have about your subject
 3. Get detailed explanations and ask follow-up questions
 
-## 🤖 AI Model
+## 🤖 AI Integration
 
-This template uses Ollama with the `llama3.2:1b` model for all AI operations. Make sure you have Ollama installed and the model downloaded:
+This project uses **Together AI** with the `meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo` model for all AI operations. The API key is configured in the application.
 
-```bash
-ollama pull llama3
-```
+### Key Benefits:
+- **Cloud-based**: No local setup required
+- **Fast responses**: Optimized for educational content
+- **Reliable**: Always available and scalable
+- **Cost-effective**: Pay-per-use pricing
 
 ## 🎨 Customization
 
@@ -94,18 +96,33 @@ ollama pull llama3
 - Adjust AI prompts in the API routes
 - Customize styling in `app/globals.css`
 - Add more features by creating new API endpoints
+- Update AI configuration in `lib/together-ai.ts`
 
 ## 🛠 Dependencies
 
 - **Next.js 14**: React framework
 - **TypeScript**: Type safety
 - **Tailwind CSS**: Styling
-- **Ollama**: Local AI model integration
+- **Together AI**: Cloud-based AI model integration
 
 ## 📖 Educational Use Cases
 
 - **Students**: Create study materials from lecture notes
 - **Teachers**: Generate quizzes and learning aids
 - **Self-learners**: Get AI tutoring on any topic
+- **Exam Prep**: Practice with generated questions and flashcards
 
-- **Exam Prep**: Practice with generated questions and flashcards 
+## 🔄 Recent Updates
+
+- **Migrated from Ollama to Together AI**: Improved reliability and performance
+- **Enhanced error handling**: Better user experience with fallback responses
+- **Comprehensive documentation**: Detailed setup and usage instructions
+- **Optimized prompts**: Better educational content generation
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. 

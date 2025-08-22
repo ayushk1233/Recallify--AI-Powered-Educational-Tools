@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { generateResponse, parseJSONFromResponse } from '../../../lib/together-ai'
 
 export async function POST(req: NextRequest) {
   try {
@@ -25,29 +26,12 @@ Focus on key concepts, definitions, and important facts. Make questions clear an
 
 Notes: ${notes}`
 
-    const response = await fetch('http://localhost:11434/api/generate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'llama3:latest',
-        prompt: prompt,
-        stream: false,
-      }),
-    })
-
-    if (!response.ok) {
-      throw new Error('Failed to get response from Ollama')
-    }
-
-    const data = await response.json()
+    const response = await generateResponse(prompt)
     
     try {
       // Try to parse JSON from the response
-      const flashcardsMatch = data.response.match(/\{[\s\S]*\}/)
-      if (flashcardsMatch) {
-        const flashcardsData = JSON.parse(flashcardsMatch[0])
+      const flashcardsData = parseJSONFromResponse(response)
+      if (flashcardsData && flashcardsData.flashcards) {
         return NextResponse.json(flashcardsData)
       }
     } catch (parseError) {
@@ -60,7 +44,7 @@ Notes: ${notes}`
       flashcards: [
         {
           front: "Generated from your notes",
-          back: data.response || 'No response from model'
+          back: response || 'No response from model'
         }
       ]
     })

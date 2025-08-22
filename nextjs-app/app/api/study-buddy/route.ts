@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { generateResponse } from '../../../lib/together-ai'
 
 export async function POST(req: NextRequest) {
   try {
@@ -31,26 +32,10 @@ IMPORTANT FORMATTING RULES:
 
 Question: ${question}`
 
-    const response = await fetch('http://localhost:11434/api/generate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'llama3:latest',
-        prompt: prompt,
-        stream: false,
-      }),
-    })
-
-    if (!response.ok) {
-      throw new Error('Failed to get response from Ollama')
-    }
-
-    const data = await response.json()
+    const response = await generateResponse(prompt)
     
     return NextResponse.json({ 
-      answer: data.response || 'I could not process your question. Please try again!' 
+      answer: response || 'I could not process your question. Please try again!' 
     })
   } catch (error) {
     console.error('Study Buddy API error:', error)

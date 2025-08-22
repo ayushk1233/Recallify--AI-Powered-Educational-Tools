@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { generateResponse, parseJSONFromResponse } from '../../../lib/together-ai'
 
 export async function POST(req: NextRequest) {
   try {
@@ -27,29 +28,12 @@ Make questions challenging but fair, with plausible distractors for incorrect op
 
 Text: ${text}`
 
-    const response = await fetch('http://localhost:11434/api/generate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'llama3:latest',
-        prompt: prompt,
-        stream: false,
-      }),
-    })
-
-    if (!response.ok) {
-      throw new Error('Failed to get response from Ollama')
-    }
-
-    const data = await response.json()
+    const response = await generateResponse(prompt)
     
     try {
       // Try to parse JSON from the response
-      const quizMatch = data.response.match(/\{[\s\S]*\}/)
-      if (quizMatch) {
-        const quizData = JSON.parse(quizMatch[0])
+      const quizData = parseJSONFromResponse(response)
+      if (quizData && quizData.quiz) {
         return NextResponse.json(quizData)
       }
     } catch (parseError) {
@@ -63,7 +47,7 @@ Text: ${text}`
           question: "What is the main topic of the provided text?",
           options: ["Topic A", "Topic B", "Topic C", "Topic D"],
           correct: 0,
-          explanation: data.response || 'Generated from your text'
+          explanation: response || 'Generated from your text'
         }
       ]
     })
